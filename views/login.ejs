@@ -37,19 +37,19 @@
       <a href="/register" type="button" class="w-100 btn btn-lg btn-bd-primary">Registrarse</a>
     </main>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Notificacion-->
     <% if(alert) { %>
       <script>
         Swal.fire({
-          title: '<%= alertTitle %>',
-          text:'<%= alertMessage %>',
-          icon:'<%= alertIcon %>',
-          showConfirmButton: '<%= showConfirmButton %>',
-          timer: '<%= timer %>'
+          title: `<%= alertTitle %>`,
+          text:`<%= alertMessage %>`,
+          icon:`<%= alertIcon %>`,
+          showConfirmButton: `<%= showConfirmButton %>`,
+          timer: `<%= timer %>`
         }).then(()=>{
-          window.location = '/<%= ruta %>'
+          window.location = `/<%= ruta %>`
         })
       </script>
     <% } %>
-
   </body>
 </html>

@@ -27,29 +27,31 @@ exports.login = async (req, res)=>{
         const pass = req.body.pass
 
         if(!user || !pass ){
+            //Notificacionde de inicio de sesión == sin datos
             res.render('login',{
                 alert:true,
                 alertTitle: "Advertencia",
                 alertMessage: "Ingrese un usuario y password",
                 alertIcon:'info',
                 showConfirmButton: true,
-                timer: false,
+                timer: 6000,
                 ruta: 'login'
             })
         }else{
             conexion.query('SELECT * FROM users WHERE user = ?', [user], async (error, results)=>{
                 if( results.length == 0 || ! (await bcryptjs.compare(pass, results[0].pass)) ){
+                    //Notificacionde de inicio de sesión == Error
                     res.render('login', {
                         alert: true,
                         alertTitle: "Error",
                         alertMessage: "Usuario y/o Password incorrectas",
                         alertIcon:'error',
                         showConfirmButton: true,
-                        timer: false,
+                        timer: 6000,
                         ruta: 'login'
                     })
                 }else{
-                    //inicio de sesión OK
+                    //inicio de sesión == OK
                     const id = results[0].id
                     const token = jwt.sign({id:id}, process.env.JWT_SECRETO, {
                         expiresIn: process.env.JWT_TIEMPO_EXPIRA
@@ -63,13 +65,14 @@ exports.login = async (req, res)=>{
                         httpOnly: true
                     }
                     res.cookie('jwt', token, cookiesOptions)
+                    //Notificacionde de inicio de sesión == Ok
                     res.render('login', {
                         alert: true,
                         alertTitle: "Conexión exitosa",
                         alertMessage: "¡LOGIN CORRECTO!",
                         alertIcon:'success',
                         showConfirmButton: false,
-                        timer: 800,
+                        timer: 1000,
                         ruta: ''
                     })
                 }
