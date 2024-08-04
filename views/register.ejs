@@ -51,6 +51,22 @@
         </div>
       </div>
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Notificaciones -->
+    <% if(typeof alert !== 'undefined' && alert) { %>
+      <script>
+        Swal.fire({
+          title: '<%= alertTitle %>',
+          text: '<%= alertMessage %>',
+          icon: '<%= alertIcon %>',
+          showConfirmButton: '<%= showConfirmButton %>',
+          timer: '<%= timer %>'
+        }).then(() => {
+          window.location = '/<%= ruta %>';
+        });
+      </script>
+    <% } %>
+
     <script src="js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

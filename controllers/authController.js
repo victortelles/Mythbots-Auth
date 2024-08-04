@@ -4,22 +4,95 @@ const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 const {promisify} = require('util')
 
-//procedimiento para registrarnos
-exports.register = async (req, res)=>{
+//Register.ejs
+// Procedimiento para registrarnos
+exports.register = async (req, res) => {
     try {
-        const name = req.body.name
-        const user = req.body.user
-        const pass = req.body.pass
-        let passHash = await bcryptjs.hash(pass, 8)
-        //console.log(passHash)
-        conexion.query('INSERT INTO users SET ?', {user:user, name: name, pass:passHash}, (error, results)=>{
-            if(error){console.log(error)}
-            res.redirect('/')
-        })
+        const { name, user, pass } = req.body;
+
+        // Validaciones: Verificar si algún campo está vacío
+        if (!name || !user || !pass) {
+            return res.render('register', {
+                alert: true,
+                alertTitle: "Advertencia",
+                alertMessage: "Todos los campos son obligatorios",
+                alertIcon: 'info',
+                showConfirmButton: true,
+                timer: 6000,
+                ruta: 'register'
+            });
+        }
+
+        // Verificar si el usuario ya existe
+        conexion.query('SELECT * FROM users WHERE user = ?', [user], async (error, results) => {
+            if (error) {
+                console.log(error);
+                return res.render('register', {
+                    alert: true,
+                    alertTitle: "Error",
+                    alertMessage: "Hubo un error en el servidor",
+                    alertIcon: 'error',
+                    showConfirmButton: true,
+                    timer: 6000,
+                    ruta: 'register'
+                });
+            }
+
+            if (results.length > 0) {
+                return res.render('register', {
+                    alert: true,
+                    alertTitle: "Advertencia",
+                    alertMessage: "El usuario ya existe",
+                    alertIcon: 'warning',
+                    showConfirmButton: true,
+                    timer: 6000,
+                    ruta: 'register'
+                });
+            }
+
+            // Si todo está bien, procedemos a registrar al usuario
+            let passHash = await bcryptjs.hash(pass, 8);
+            conexion.query('INSERT INTO users SET ?', { user: user, name: name, pass: passHash }, (error, results) => {
+                if (error) {
+                    console.log(error);
+                    return res.render('register', {
+                        alert: true,
+                        alertTitle: "Error",
+                        alertMessage: "Hubo un error en el registro",
+                        alertIcon: 'error',
+                        showConfirmButton: true,
+                        timer: 6000,
+                        ruta: 'register'
+                    });
+                }
+                // Notificación de registro exitoso
+                return res.render('register', {
+                    alert: true,
+                    alertTitle: "Registro exitoso",
+                    alertMessage: "¡Te has registrado correctamente!",
+                    alertIcon: 'success',
+                    showConfirmButton: true,
+                    timer: 1500,
+                    ruta: 'login'
+                });
+            });
+        });
+
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        return res.render('register', {
+            alert: true,
+            alertTitle: "Error",
+            alertMessage: "Hubo un error en el servidor",
+            alertIcon: 'error',
+            showConfirmButton: true,
+            timer: false,
+            ruta: 'register'
+        });
     }
 }
+
+//login.ejs
 
 exports.login = async (req, res)=>{
     try {
