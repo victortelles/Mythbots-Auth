@@ -22,7 +22,10 @@
       <!-- Formulario-->
       <form id="formLogin" action="/login" method="POST">
         <!-- Logo-->
-        <img class="img-logo mb-4" src="/img/MythBots_Logo.png" alt="logo">
+        <img class="img-logo mb-2" src="/img/MythBots_Logo.png" alt="logo">
+        <!-- Titulo -->
+        <h3 class="card-title text-center mb-3">Iniciar sesión</h3>
+        <hr>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="user" name="user" placeholder="User">
           <label for="user">Nombre de usuario</label>
@@ -33,8 +36,9 @@
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesion</button>
       </form>
-      <h4>ó</h4>
-      <a href="/register" type="button" class="w-100 btn btn-lg btn-bd-primary">Registrarse</a>
+      <div class="mt-4">
+        <p>¿Todavía no tiene una cuenta? <a href="/register">Regístrate</a></p>
+      </div>
     </main>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Notificacion-->
