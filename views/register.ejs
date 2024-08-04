@@ -7,49 +7,66 @@
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-    <style>
-    body {
-      /* display: flex; */
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color:rgba(255,255,255,0.95);
-    }
-    </style>
-    <title>Login con Node + JWT + MySQL</title>
+    <link href="css/register.css" rel="stylesheet">
+    <title>Registro | MythBots</title>
   </head>
   <body>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 shadow-lg p-3 mb-5">
-
-          <div class="card border-primary">
-            <div class="card-header bg-primary text-white">Registrarse</div>
-            <div class="card-body text-primary">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="card p-4 shadow-lg">
+        <div class="row no-gutters">
+          <!-- card 1 - izq-->
+          <div class="col-md-5 d-flex flex-column align-items-center justify-content-center p-4">
+            <!-- Logotipo-->
+            <img src="/img/MythBots_Logo.png" alt="Logo" class="img-fluid mb-3">
+            <!-- Titulo-->
+            <h2 class="text-primary">Bienvenido a MythBots</h2>
+            <!-- Eslogan-->
+            <p class="text-secondary">Únete a nosotros y comienza tu viaje</p>
+          </div>
+          <!-- card 2 - der -->
+          <div class="col-md-7 p-4">
+            <div class="card-body">
+              <h3 class="card-title text-center mb-3">Registrarse</h3>
+              <hr>
               <form action="/register" method="POST">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Nombre completo</label>
-                    <input id="name" name="name" type="text" class="form-control" aria-describedby="emailHelp">
+                  <label for="name" class="form-label">Nombre completo</label>
+                  <input id="name" name="name" type="text" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="user" class="form-label">Cuenta de usuario</label>
-                    <input id="user" name="user" type="text" class="form-control">
+                  <label for="user" class="form-label">Cuenta de usuario</label>
+                  <input id="user" name="user" type="text" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="pass" class="form-label">Password</label>
-                    <input id="pass" name="pass" type="password" class="form-control">
+                  <label for="pass" class="form-label">Password</label>
+                  <input id="pass" name="pass" type="password" class="form-control">
                 </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-block w-100">Registrar</button>
+                  <p class="mt-3">¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+                </div>
+              </form>
             </div>
-            <div class="card-footer bg-transparent border-primary">
-              <a href="/" type="button" class="btn btn-secondary">Cancelar</a>
-              <button type="submit" class="btn btn-primary">Registrar</button>
-            </div>
-            </form>
           </div>
         </div>
+      </div>
     </div>
-</div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Notificaciones -->
+    <% if(typeof alert !== 'undefined' && alert) { %>
+      <script>
+        Swal.fire({
+          title: '<%= alertTitle %>',
+          text: '<%= alertMessage %>',
+          icon: '<%= alertIcon %>',
+          showConfirmButton: '<%= showConfirmButton %>',
+          timer: '<%= timer %>'
+        }).then(() => {
+          window.location = '/<%= ruta %>';
+        });
+      </script>
+    <% } %>
+
     <script src="js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

@@ -6,8 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.87.0">
-    <title>LOGIN CON NODE + JWT</title>
-
+    <title>MythBots-Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,39 +17,39 @@
   </head>
   <body class="text-center">
 
-<main class="form-signin text-center shadow-lg p-3 mb-5">
-
-  <form id="formLogin" action="/login" method="POST">
-    <img class="mb-4" src="img/bootstrap-logo.svg" alt="" width="72" height="57">
-    <div class="form-floating">
-      <input type="text" class="form-control" id="user" name="user" placeholder="User">
-      <label for="user">User</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
-      <label for="pass">Password</label>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-  </form>
-
-  <br>
-  <a href="/register" type="button" class="w-100 btn btn-lg btn-bd-primary">Registrarse</a>
-</main>
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <% if(alert) { %>
-    <script>
-      Swal.fire({
-        title: '<%= alertTitle %>',
-        text:'<%= alertMessage %>',
-        icon:'<%= alertIcon %>',
-        showConfirmButton: '<%= showConfirmButton %>',
-        timer: '<%= timer %>'
-      }).then(()=>{
-        window.location = '/<%= ruta %>'
-      })
-    </script>
-  <% } %>
-
+    <!-- Card -->
+    <main class="form-signin text-center shadow-lg p-3 mb-5 mx-auto">
+      <!-- Formulario-->
+      <form id="formLogin" action="/login" method="POST">
+        <!-- Logo-->
+        <img class="img-logo mb-4" src="/img/MythBots_Logo.png" alt="logo">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="user" name="user" placeholder="User">
+          <label for="user">Nombre de usuario</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+          <label for="pass">Contraseña</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesion</button>
+      </form>
+      <h4>ó</h4>
+      <a href="/register" type="button" class="w-100 btn btn-lg btn-bd-primary">Registrarse</a>
+    </main>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Notificacion-->
+    <% if(alert) { %>
+      <script>
+        Swal.fire({
+          title: `<%= alertTitle %>`,
+          text:`<%= alertMessage %>`,
+          icon:`<%= alertIcon %>`,
+          showConfirmButton: `<%= showConfirmButton %>`,
+          timer: `<%= timer %>`
+        }).then(()=>{
+          window.location = `/<%= ruta %>`
+        })
+      </script>
+    <% } %>
   </body>
 </html>
